@@ -14,6 +14,7 @@ import firstapp.models as models
 from .models import Curriculum
 
 def insert(request):
+
     # 1  create()
     Curriculum.objects.create(name='linux')
 
@@ -25,3 +26,10 @@ def insert(request):
     Curriculum(name='django').save()
 
     return HttpResponse('ok')
+
+def show(request):
+    curriculum = Curriculum.objects.all()
+    result = ''
+    for c in curriculum:
+        result += c.name + '<br>'
+    return HttpResponse(result)
