@@ -25,11 +25,18 @@ def insert(request):
     Curriculum(name='python').save()
     Curriculum(name='django').save()
 
-    return HttpResponse('ok')
+    return HttpResponse('ok <h1>dkdkdkdkd</h1>')
 
 def show(request):
+    # curriculum = Curriculum.objects.all()
+    # result = ''
+    # for c in curriculum:
+    #     result += c.name + '<br>'
+    # return HttpResponse(result)
+
+    #              필수!        필수! 변경가능    필수아님
     curriculum = Curriculum.objects.all()
-    result = ''
-    for c in curriculum:
-        result += c.name + '<br>'
-    return HttpResponse(result)
+    return render(
+        request, 'firstapp/show.html', 
+        { 'score': 100, 'data': curriculum }
+    )
