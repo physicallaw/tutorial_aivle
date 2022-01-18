@@ -37,6 +37,6 @@ def show(request):
     #              필수!        필수! 변경가능    필수아님
     curriculum = Curriculum.objects.all()
     return render(
-        request, 'firstapp/show.html', 
+        request, 'show.html', 
         { 'score': 100, 'data': curriculum }
     )

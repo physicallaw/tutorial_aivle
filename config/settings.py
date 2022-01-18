@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'firstapp',
     'secondapp',
+    'thirdapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,9 +80,33 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'custom': {  # thirdapp에서 사용할 데이터베이스 설정 추가
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'aivle',
+        'USER': 'aivle',
+        'PASSWORD': '1234',
+        'HOST': '15.164.153.191',
+        'PORT': 3306
     }
 }
-
+DATABASE_ROUTERS = ['thirdapp.router.DBRouter']
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
