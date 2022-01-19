@@ -26,4 +26,9 @@ urlpatterns = [
     path('second/', include('secondapp.urls')),
     path('third/', include('thirdapp.urls')),
     path('home/', config_views.home),
+
+    path('text/<str:char>/',config_views.text),
+    path('<int:year>/<int:month>/',config_views.date),
+    path('search/', config_views.search),
+    path('info/', config_views.info),
 ]

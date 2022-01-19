@@ -28,9 +28,30 @@ def show(request):
     )
 
 def army_shop(request):
-    shop = ArmyShop.objects.all()
+    # prd = request.GET.get('prd', '')  # 부작용 side effect
+    prd = request.GET.get('prd')  # 부작용 side effect
+
+    # shop = ArmyShop.objects.all()
+
+    try:
+        shop = ArmyShop.objects.filter(name__contains=prd)
+    except:
+        shop = ArmyShop.objects.all()
+
+    ## Template Theme PlaceHolder
     return render(
         request, 
         'secondapp/army_shop.html',
         { 'data': shop }
     )
+
+def army_shop2(request, year, month):
+    shop = ArmyShop.objects.filter(year=year, month=month)
+    
+    # result = ''
+    # for i in shop:    # formatting 방식 3가지
+    #     result += '%s %s %s<br>' % (i.year, i.month, i.name)
+
+    result = [ '%s %s %s<br>' % (i.year, i.month, i.name) for i in shop ]
+
+    return HttpResponse(''.join(result))
