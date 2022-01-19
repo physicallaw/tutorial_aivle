@@ -74,3 +74,28 @@ class Product(models.Model):
   class Meta:
     db_table = 'product'
     managed = False
+
+class Dept(models.Model):
+  deptno = models.AutoField(primary_key=True)
+  dname = models.CharField(max_length=14, null=True)
+  loc = models.CharField(max_length=13, null=True)
+
+  class Meta:
+    db_table = 'dept'
+    managed = False
+
+class Emp(models.Model):
+  empno = models.AutoField(primary_key=True)
+  ename = models.CharField(max_length=10, null=True)
+  job = models.CharField(max_length=9, null=True)
+  mgr = models.IntegerField(null=True)
+  hiredate = models.DateTimeField(null=True)
+  sal = models.IntegerField(null=True)
+  comm = models.IntegerField(null=True)
+  dept = models.ForeignKey(
+      Dept, on_delete=models.SET_NULL, null=True, db_column='deptno')
+
+  class Meta:
+    db_table = 'emp'
+    managed = False
+
