@@ -30,6 +30,7 @@ def show(request):
 def army_shop(request):
     # prd = request.GET.get('prd', '')  # 부작용 side effect
     prd = request.GET.get('prd')  # 부작용 side effect
+    # prd = request.POST.get('prd')  # 부작용 side effect
 
     # shop = ArmyShop.objects.all()
 

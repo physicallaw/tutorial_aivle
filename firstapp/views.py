@@ -40,3 +40,23 @@ def show(request):
         request, 'show.html', 
         { 'score': 100, 'data': curriculum }
     )
+
+
+def req_get(request):
+    a = request.GET.get('a')
+    b = request.GET.get('b')
+    c = request.GET.get('c')
+    result = '%s %s %s' % (a, b, c)
+    return HttpResponse(result)
+
+def req_post(request):
+    if request.method == 'POST':
+        a = request.POST.get('a')
+        b = request.POST.get('b')
+        c = request.POST['c']
+        result = '%s %s %s' % (a, b, c)
+        return HttpResponse(result)
+    return render(request, 'firstapp/post.html')
+
+def req_ajax4(request):
+    return render(request, 'firstapp/ajax4.html')

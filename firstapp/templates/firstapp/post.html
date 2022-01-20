@@ -1,0 +1,31 @@
+<form action="/first/req/post/" method="post">
+    <input type="text" name="a"><br>
+    <input type="text" name="b"><br>
+    <input type="text" name="c"><br>
+    {% csrf_token %}
+    <button>Send</button>
+</form>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const data = axios( {
+        url: 'http://ggoreb.com/dinosaur/info.jsp',
+        method: 'get',
+        params: { }
+    } );
+    data.then(function(xyz) {
+        console.log(xyz.data);
+        let html = '<ol>';
+        for(let i = 0; i < xyz.data.length; i++) {
+            let kind = xyz.data[i]['kind']
+            console.log(kind);
+            html += `<li>${kind}</li>`  // backtick
+            // xyz.data[i].kind
+            // <li>육식공룡</li><li>초식공룡</li>..
+        }
+        html += '</ol>';
+        document.body.innerHTML += html;
+    }); // 비동기 작업 후 처리하는 CallBack
+</script>
+

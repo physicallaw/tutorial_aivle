@@ -1,0 +1,32 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+    const formData = new FormData();
+    formData.append('a', 1123123120);
+    formData.append('b', 21231230);
+    formData.append('c', 30);
+    const data = axios({
+        url: '/first/req/post/',
+        method: 'post',
+        data: formData,
+        headers: { 'X-CSRFToken': csrftoken }
+    });
+    data.then(function (result) {
+        console.log(result.data);
+    });
+</script>
