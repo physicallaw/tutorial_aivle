@@ -1,0 +1,24 @@
+{% load static %}
+
+<button id='get'>GET</button>
+<button id='post'>POST</button>
+<button id='json'>JSON</button>
+
+<img src='/static/다운로드.jfif'>
+<img src='{% static "다운로드.jfif" %}'>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.querySelector('#get').addEventListener('click', () => {
+        const data = axios( {
+            url: '/second/req/ajax/get/',
+            method: 'get',
+            params: { }
+        } );
+        data.then(function(res) {
+            console.log(res.data);
+        });
+    });
+    
+</script>
+

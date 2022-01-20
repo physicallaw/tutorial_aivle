@@ -1,5 +1,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    // p99
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -16,17 +17,20 @@
     }
 
     const csrftoken = getCookie('csrftoken');
-    const formData = new FormData();
-    formData.append('a', 1123123120);
-    formData.append('b', 21231230);
-    formData.append('c', 30);
+    const data2 = { 'a': 10, 'b': 20, 'c': 30 };
     const data = axios({
-        url: '/first/req/post/',
+        url: '/first/req/json/',
         method: 'post',
-        data: formData,
-        headers: { 'X-CSRFToken': csrftoken }
+        data: JSON.stringify(data2),
+        headers: { 
+            // 'X-CSRFToken': csrftoken,
+            'Content-Type': 'application/json'
+        }
     });
     data.then(function (result) {
         console.log(result.data);
     });
+
+    // const data = '';
+
 </script>
