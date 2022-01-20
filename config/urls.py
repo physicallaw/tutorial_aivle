@@ -31,4 +31,6 @@ urlpatterns = [
     path('<int:year>/<int:month>/',config_views.date),
     path('search/', config_views.search),
     path('info/', config_views.info),
+
+    path('image/', config_views.download),
 ]

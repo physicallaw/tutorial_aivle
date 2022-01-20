@@ -17,3 +17,15 @@ def search(request):
 def info(request):
     id = request.GET.get('id')
     return HttpResponse('id : %s' % (id))
+
+import os
+def download(request, id):
+    # 로그인 여부
+    # ip 어떤 국가/지역
+    # 블랙리스트
+    filepath = 'c:/django/dog.jfif'
+    filename = os.path.basename(filepath)
+    with open(filepath, 'rb') as f:
+        response = HttpResponse(f, content_type='application/octet-stream')
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
