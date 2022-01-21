@@ -68,3 +68,26 @@ def req_json(request):
     obj = request.body.decode("utf-8")
     data = json.loads(obj)
     return JsonResponse(data)
+
+def tag(request):
+    persons = [
+        { 'num': 1, 'name': 'Park', 'score': 100 },
+        { 'num': 2, 'name': 'Choi', 'score': 70 },
+        { 'num': 3, 'name': 'Kim', 'score': 80 }
+    ]
+    animals = ['Cat2', 'Dog']
+    context = {
+        'persons': persons,
+        'animals': animals
+    }
+    return render(
+        request, 'firstapp/tag.html', context)
+
+def custom_filter(request):
+    context = { 'price': 39800.5 }
+    return render(
+        request, 'firstapp/custom_filter.html', context)
+    
+def template(request):
+    return render(
+        request, 'firstapp/template.html')
