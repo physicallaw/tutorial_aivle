@@ -75,3 +75,28 @@ def ajaxGet(request):
 
 def ajaxExam(request):
     return render( request, 'secondapp/ajax_exam.html' )
+
+from django.shortcuts import redirect
+from secondapp.forms import CourseForm
+def course_create(request):
+    if request.method == 'POST':
+        ## form 미 사용시 작성되는 코드
+        # name = request.POST.get('name')
+        # cnt = request.POST.get('cnt')
+        # c = Course(name=name, cnt=cnt)
+        # c.save()
+
+        # 1. 입력된 데이터를 한꺼번에 저장
+        # 2. 유효성 검사 결과가 저장
+        form = CourseForm( request.POST )
+        if form.is_valid():
+            # 데이터 저장
+            course = form.save(commit=False)
+            course.save()
+
+            # 어딘가로 이동, 메시지 출력, ....
+            return redirect('firstapp:post')
+    else:
+        form = CourseForm()
+
+    return render(request, 'secondapp/course_create.html', {'form': form})

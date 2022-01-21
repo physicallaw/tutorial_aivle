@@ -33,4 +33,6 @@ urlpatterns = [
     path('info/', config_views.info),
 
     path('image/', config_views.download),
+
+    path('member/', include('member.urls')),
 ]

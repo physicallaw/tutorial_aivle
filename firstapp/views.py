@@ -37,7 +37,7 @@ def show(request):
     #              필수!        필수! 변경가능    필수아님
     curriculum = Curriculum.objects.all()
     return render(
-        request, 'show.html', 
+        request, 'firstapp/show.html', 
         { 'score': 100, 'data': curriculum }
     )
 
@@ -91,3 +91,27 @@ def custom_filter(request):
 def template(request):
     return render(
         request, 'firstapp/template.html')
+
+
+from django.shortcuts import redirect
+from .forms import CurriculumForm
+def form_model(request):
+    if request.method == 'POST':
+        # 혜택 1. 사용자의 요청 데이터를 form으로 대입
+        form = CurriculumForm(request.POST)
+
+        # 혜택 2. 유효성 검사 결과
+        if form.is_valid():
+            # 할일.. 데이터 저장하기
+            curriculum = form.save(commit=False)
+            # 누락된 데이터를 추가로 입력하기 
+            # (작성일자, 작성자아이디)
+            curriculum.save()
+
+            return redirect('firstapp:post')
+    else:
+        form = CurriculumForm()
+    return render(
+        request, 'firstapp/form_model.html',
+        { 'form': form }
+    )

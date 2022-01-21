@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'member',
     'firstapp',
     'secondapp',
     'thirdapp',
@@ -147,3 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/member/login/'
+LOGOUT_REDIRECT_URL = '/member/login/'
+
+
+
+
