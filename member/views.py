@@ -14,3 +14,45 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'member/signup.html', {'form': form})
+
+from .models import Member
+from django.utils import timezone
+from django.http import HttpResponse
+
+def signup_custom(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user_pw = request.POST.get('user_pw')
+        user_name = request.POST.get('user_name')
+        m = Member(
+            user_id=user_id, user_pw=user_pw, user_name=user_name)
+        m.date_joined = timezone.now()
+        m.save()
+        return HttpResponse(
+            '가입 완료<br>%s %s %s' % (user_id, user_pw, user_name))
+    else:
+        return render(request, 'member/signup_custom.html')
+
+def login_custom(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user_pw = request.POST.get('user_pw')
+        
+        try:
+            m = Member.objects.get(user_id=user_id, user_pw=user_pw)
+        except Member.DoesNotExist as e:
+            return HttpResponse('로그인 실패')
+        else:
+            request.session['user_id'] = m.user_id
+            request.session['user_name'] = m.user_name
+
+        return redirect('member:login_custom')
+    else:
+        return render(request, 'member/login_custom.html')
+
+def logout_custom(request):
+    del request.session['user_id']
+    del request.session['user_name']
+    
+    request.session.flush()
+    return redirect('member:login_customc')
