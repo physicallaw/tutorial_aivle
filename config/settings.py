@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'file',
+    'paging',
     'member',
     'firstapp',
     'secondapp',
@@ -153,5 +155,7 @@ LOGIN_REDIRECT_URL = '/member/login/'
 LOGOUT_REDIRECT_URL = '/member/login/'
 
 
+# MEDIA
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
